@@ -1,0 +1,30 @@
+<html>
+    <head>
+        <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/index.css') }}">
+
+    </head>
+    <body>
+        <div class="sidebar">
+        <h3>Amazon S3</h3>
+        <a href="/createbucket">Create Bucket</a>
+        <a href="/listallbuckets">List All Bucket</a>
+        <a href="/creationtime">Creation Time</a>
+        <a href="/getbucketpolicy">Get Bucket Policy</a>
+        <a href="/deletebucketpolicy">Delete Bucket Policy</a>
+        <a href="/uploadfile">Upload File</a>
+
+        <h3>Amazon EC2</h3>
+        <a href="/createinstance">Create Instance</a>
+        <a href="/getpublicip">Get Public IP</a>
+        <a href="/getrunninginstances">Get Running Instances</a>
+        <a href="/stopinstance">Stop Instance</a>
+        <a href="/terminate_instance">Terminate Instance</a>
+        <a href="/rebootinstance">Reboot Instance</a>
+        <a href="/describeinstance">Describe Instance</a>
+        </div>
+        <div class="content">
+            <img src="{{url_for('static', filename='aws.png')}}"/>
+        </div>
+
+    </body>
+</html>
