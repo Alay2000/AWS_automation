@@ -21,7 +21,7 @@ def add():
 def function1():
     if request.method=='POST':
         bucket_name=request.form['name']
-        location=request.form['Location']
+        location="us-east-2"
     return aws_bucket.createbucket(bucket_name, location)
 
 

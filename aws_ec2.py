@@ -6,8 +6,7 @@ def create_instance(keyname):
 
     private_key = key_pair["KeyMaterial"]
 
-    # write private key to file with 400 permissions
-    with os.fdopen(os.open("/tmp/{keyname}.pem", os.O_WRONLY | os.O_CREAT, 0o400), "w+") as handle:
+    with os.fdopen(os.open("/tmp/%s.pem" %keyname, os.O_WRONLY | os.O_CREAT, 0o400), "w+") as handle:
         handle.write(private_key)
     ec2_client = boto3.client("ec2", region_name="us-west-2")
     instances = ec2_client.run_instances(
