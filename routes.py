@@ -27,7 +27,9 @@ def function1():
 
 @app.route('/listallbuckets')
 def function2():
-    return aws_bucket.listallbuckets()
+    bucketlist=[]
+    bucketlist=aws_bucket.listallbuckets()
+    return render_template('view.html',buckets=bucketlist,var='list')
 
 
 @app.route('/getbucketpolicy')
@@ -43,7 +45,9 @@ def function3():
 
 @app.route('/creationtime')
 def function4():
-    return aws_bucket.creationTime()
+    timecreated=[[]]
+    timecreated=aws_bucket.creationTime()
+    return render_template('view.html',timecreated=timecreated,var='time')
 
 @app.route('/deletebucketpolicy')
 def add2():
@@ -64,7 +68,8 @@ def functionupload():
 def function6():
     f = request.files['file']
     f.save(os.path.join(UPLOAD_FOLDER, f.filename))
-    return aws_bucket.uploadfile(f"uploads/{f.filename}", "alay")
+    name=request.form['name']
+    return aws_bucket.uploadfile(f"uploads/{f.filename}", name)
     
 
 
@@ -84,7 +89,9 @@ def function8():
 
 @app.route('/getrunninginstances')
 def function9():
-    return aws_ec2.get_running_instances()
+    temp=[[]]
+    temp=aws_ec2.get_running_instances()
+    return render_template('view.html',temp=temp,var='instance')
 
 @app.route('/stopinstance')
 def function10():
@@ -132,6 +139,6 @@ def function19():
     return aws_ec2.describe_instance(name)
 
 
-
-if __name__=='__main__':
-    app.run(debug=True)
+if __name__ == '__main__':
+    port = int(os.environ.get('PORT', 5000))
+    app.run(debug=True, host='0.0.0.0', port=port)

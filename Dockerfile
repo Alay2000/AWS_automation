@@ -1,8 +1,8 @@
 FROM python:3.8-alpine
+COPY ./requirements.txt /app/requirements.txt
 WORKDIR /app
-COPY . .
-RUN ls -lah
-RUN cp -r /home/in441/.aws -/
 RUN pip3 install -r requirements.txt
+COPY . /app
 EXPOSE 5000
-CMD [ "python3","routes.py" ]
+ENTRYPOINT [ "python3" ]
+CMD ["routes.py"]

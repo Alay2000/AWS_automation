@@ -16,11 +16,11 @@ def createbucket(bucket_name, bucket_location='None'):
 def listallbuckets():
     s3 = boto3.client('s3')
     response = s3.list_buckets()
-
+    bucketlist=[]
     print('The Existing Buckets on the AWS account are: ')
     for buck in response['Buckets']: 
-        print(f' {buck["Name"]}')
-    return response
+        bucketlist.append(f' {buck["Name"]}')
+    return bucketlist
 
 
 
@@ -28,11 +28,14 @@ def creationTime():
     s3_resource = boto3.client('s3')
     creation_date=s3_resource.list_buckets()["Buckets"][0]["CreationDate"]
     creation_date.strftime("%d%m%y_%H:%M:%s")
-
+    timecreated=[[]]
+    
     for bucket in s3_resource.list_buckets()["Buckets"]:
-        print(bucket["Name"])
-        print(bucket["CreationDate"])
-    return 'listed in py console for now'
+        temp=[]
+        temp.append(bucket["Name"])
+        temp.append(bucket["CreationDate"])
+        timecreated.append(temp)
+    return timecreated
     
 
 

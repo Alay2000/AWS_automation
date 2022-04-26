@@ -66,6 +66,16 @@
         {% endif %}
         {%if var=='upload'%}
         <form method="POST" action="/uploadfile/success" enctype=multipart/form-data>
+            <table>
+                <tr>
+                    <td>
+                        Enter Bucket Name
+                    </td>
+                    <td>
+                        <input type="text" name="name">
+                    </td>
+                </tr>
+            </table>
             <input type=file name=file>
             <input type=submit value=Upload>
           </form>

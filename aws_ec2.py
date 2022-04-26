@@ -23,11 +23,11 @@ def create_instance(keyname):
 def get_public_ip(instance_id):
     ec2_client = boto3.client("ec2", region_name="us-west-2")
     reservations = ec2_client.describe_instances(InstanceIds=[instance_id]).get("Reservations")
-
+    temp=""
     for reservation in reservations:
         for instance in reservation['Instances']:
-            print(instance.get("PublicIpAddress"))
-    return 'in py console'
+            temp=(instance.get("PublicIpAddress"))
+    return temp
 
 
 def get_running_instances():
@@ -38,15 +38,21 @@ def get_running_instances():
             "Values": ["running"],
         }
     ]).get("Reservations")
-
+    instances=[[]]
     for reservation in reservations:
         for instance in reservation["Instances"]:
+            temp=[]
             instance_id = instance["InstanceId"]
+            temp.append(instance_id)
             instance_type = instance["InstanceType"]
+            temp.append(instance_type)
             public_ip = instance["PublicIpAddress"]
+            temp.append(public_ip)
             private_ip = instance["PrivateIpAddress"]
+            temp.append(private_ip)
             print(f"{instance_id}, {instance_type}, {public_ip}, {private_ip}")
-    return "printed in py console for now"
+            instances.append(temp)
+    return instances
 
 
 def stop_instance(instance_id):
@@ -73,4 +79,4 @@ def describe_instance(instance_id):
     ec2 = boto3.client('ec2',region_name="us-west-2")
     response = ec2.describe_instances(InstanceIds=[instance_id])
     print(response)
-    return 'in py console for now'
+    return response
